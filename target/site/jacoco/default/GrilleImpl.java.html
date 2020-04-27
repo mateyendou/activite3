@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GrilleImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MyProject</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">GrilleImpl.java</span></div><h1>GrilleImpl.java</h1><pre class="source lang-java linenums">import java.util.Scanner;
+/**
+*Implementation d'une grille.
+*/
+public class GrilleImpl implements Grille {
+/**Déclaration du nombre de ligne de la grille.*/
+private final int line;
+/**Déclaration du nombre de colonne de la grille.*/
+private final int col;
+/**Déclaration de la taille du carré.*/
+private final int sq;
+/**Déclaration du caractère 'vide'.*/
+static final char EMPTY = '@';
+/**Déclaration des valeurs possibble pour la grille.*/
+<span class="fc" id="L15">private char[] possible = new char[] {'1', '2', '3', '4', '5', '6',</span>
+'7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f' };
+/**Déclaration d'une grille sudoku.*/
+private char[][] sudoku;
+/**Déclaration de constante.*/
+static final int SUDOKU_9 = 9;
+/**Déclaration de constante.*/
+static final int SUDOKU_16 = 16;
+/**Déclaration de constante.*/
+static final int CARRE_3 = 3;
+/**Déclaration de constante.*/
+static final int CARRE_4 = 4;
+/**Déclaration de constante.*/
+static final int MAX_CHAR = 15;
+/**
+*Constructeur par défaut.
+*@param x position x dans la grille.
+*@param y position y dans la grille.
+*@param box  le carré.
+*dont le coin [haut, gauche] est [x,y].
+*/
+<span class="fc" id="L36">public GrilleImpl(int x,  int y, int box) {</span>
+<span class="fc" id="L37">this.line = x;</span>
+<span class="fc" id="L38">this.col = y;</span>
+<span class="fc" id="L39">this.sq = box;</span>
+<span class="fc" id="L40">this.sudoku = new char[line][col];</span>
+<span class="fc" id="L41">initializesudoku();</span>
+<span class="fc" id="L42">}</span>
+/**
+ *La procédure pour initialiser une grille sudoku vide.
+ */
+private void initializesudoku() {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">for (int x = 0; x &lt; this.line; x++) {</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">for (int y = 0; y &lt; this.col; y++) {</span>
+<span class="fc" id="L49">this.sudoku[x][y] = EMPTY;</span>
+}
+}
+<span class="fc" id="L52">}</span>
+/**
+*@return vrai si l'indexe en paramètre est dans l'intervalle correcte.
+*@param index entier.
+*/
+private boolean inrange(int index) {
+<span class="pc bpc" id="L58" title="1 of 4 branches missed.">return index &lt;= this.line &amp;&amp; index &gt;= 0;</span>
+}
+/**@return vrai si la valeur en paramètre figure.
+*dans la lsite des caractères autorisée.
+*@param valeur à comparer.*/
+private boolean correspondance(char valeur) {
+<span class="fc" id="L64">int i = 0;</span>
+<span class="fc" id="L65">boolean trouver = false;</span>
+<span class="fc bfc" id="L66" title="All 4 branches covered.">while (i &lt;= MAX_CHAR &amp;&amp; trouver == false) {</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">if (valeur != possible[i]) {</span>
+<span class="fc" id="L68">trouver = false;</span>
+} else {
+<span class="fc" id="L70">trouver = true;</span>
+}
+<span class="fc" id="L72">i++;</span>
+}
+<span class="fc" id="L74">return trouver;</span>
+}
+/**
+*@return vrai si la  valeur v est possible pour la ligne x.
+*@param x position x dans la grille.
+*@param v valeur à mettre dans la case.*/
+private boolean lignePossible(int x, char v) {
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">if (x &lt;= this.line) {</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">for (int y = 0; y &lt; this.col; y++) {</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">if (this.sudoku[x][y] == v) {</span>
+<span class="nc" id="L84">return false;</span>
+}
+}
+}
+<span class="fc" id="L88">return true;</span>
+}
+/**
+*@return vrai si la  valeur v est possible pour la colonne  y.
+*@param y positiony y dans la grille.
+*@param v valeur à mettre dans la case.*/
+private boolean colonnePossible(int y,  char v) {
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">if (y &lt;= this.col) {</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">for (int x = 0; x &lt; this.line; x++) {</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">if (this.sudoku[x][y] == v) {</span>
+<span class="nc" id="L98">return false;</span>
+}
+}
+}
+<span class="fc" id="L102">return true;</span>
+}
+/**
+*@return vrai si la  valeur v est possible pour le carré.
+*dont le coin [haut, gauche] est [x,y].
+*@param x position x dans la grille.
+*@param y position y dans la grille.
+*@param v valeur à mettre dans la case.*/
+private boolean carrePossible(int x,  int y,  char v) {
+<span class="fc" id="L111">int coinline = (x / this.sq) * this.sq;</span>
+<span class="fc" id="L112">int coincol = (y / this.sq) * this.sq;</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">for (int x1 = 0; x1 &lt; this.sq; x1++) {</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">for (int y1 = 0; y1 &lt; this.sq; y1++) {</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">if (this.sudoku[coinline + x1][coincol + y1] == v) {</span>
+<span class="nc" id="L116">return false;</span>
+}
+}
+}
+<span class="fc" id="L120">return true;</span>
+}
+/**@return largeur/hauteur de la grille*/
+public int getDimension() {
+<span class="fc" id="L124">return this.sudoku.length;</span>
+}
+/**
+* Affecte une valeur dans la grille.
+* @param x  position x dans la grille
+* @param y  position y dans la grille
+* @param value valeur a mettre dans la case
+* @throws IllegalArgumentException si x ou y sont hors bornes (0-8)
+* @throws IllegalArgumentException si la valeur est interdite aux vues des
+*        autres valeurs de la grille
+* @throws IllegalArgumentException si value n'est pas un caractere autorise
+*        ('1',...,'9')
+*/
+public void setValue(int x, int y, char value) throws IllegalArgumentException {
+<span class="fc bfc" id="L138" title="All 2 branches covered.">if (!this.inrange(x)) {</span>
+<span class="fc" id="L139">throw new IllegalArgumentException(&quot;x est hors bornes (0-8)&quot;);</span>
+}
+<span class="fc bfc" id="L141" title="All 2 branches covered.">if (!this.inrange(y)) {</span>
+<span class="fc" id="L142">throw new IllegalArgumentException(&quot;y est hors bornes (0-8)&quot;);</span>
+}
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">if (value == EMPTY) {</span>
+<span class="nc" id="L145">this.sudoku[x][y] = EMPTY;</span>
+} else {
+<span class="fc bfc" id="L147" title="All 2 branches covered.">if (!this.correspondance(value)) {</span>
+<span class="fc" id="L148">throw new IllegalArgumentException(&quot;(Valeur non autorise '1',...,'9')&quot;);</span>
+}
+<span class="fc" id="L150">this.sudoku[x][y] = value;</span>
+}
+<span class="fc" id="L152">}</span>
+/**
+* Recupere une valeur de la grille.
+* @param x      position x dans la grille
+* @param y      position y dans la grille
+* @return valeur dans la case x,y
+* @throws IllegalArgumentException si x ou y sont hors bornes (0-8)
+*/
+public char getValue(int x,  int y) throws IllegalArgumentException {
+<span class="fc bfc" id="L161" title="All 2 branches covered.">if (!this.inrange(x)) {</span>
+<span class="fc" id="L162">throw new IllegalArgumentException(&quot;x est hors bornes (0-8)&quot;);</span>
+}
+<span class="fc bfc" id="L164" title="All 2 branches covered.">if (!this.inrange(y)) {</span>
+<span class="fc" id="L165">throw new IllegalArgumentException(&quot;y est hors bornes (0-8)&quot;);</span>
+}
+<span class="fc" id="L167">return sudoku[x][y];</span>
+}
+/**
+* Test si une grille est terminee.
+* @return true si la grille est complete
+*/
+public boolean complete() {
+<span class="fc bfc" id="L174" title="All 2 branches covered.">for (int x = 0; x &lt; this.line; x++) {</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">for (int y = 0; y &lt; this.col; y++) {</span>
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">if (this.sudoku[x][y] == ' ') {</span>
+<span class="nc" id="L177">return false;</span>
+}
+}
+}
+<span class="fc" id="L181">return true;</span>
+}
+/**
+* Test si une valeur est possible dans la grille par rapport a ce qu'elle.
+* contient deja
+* @return true si la valeur est possible dans la grille
+* @param x     position x dans la grille
+* @param y     position y dans la grille
+* @param value
+*            valeur a mettre dans la case
+* @throws IllegalArgumentException si x ou y sont hors bornes (0-8)
+* @throws IllegalArgumentException si value n'est pas un caractere autorise
+*        ('1',...,'9',..)
+*/
+public boolean possible(int x,  int y,  char value)
+throws IllegalArgumentException {
+<span class="fc" id="L197">boolean possibl = false;</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">if (!this.inrange(x)) {</span>
+<span class="fc" id="L199">throw new IllegalArgumentException(&quot;x est hors bornes (0-8)&quot;);</span>
+}
+<span class="fc bfc" id="L201" title="All 2 branches covered.">if (!this.inrange(y)) {</span>
+<span class="fc" id="L202">throw new IllegalArgumentException(&quot;y est hors bornes (0-8)&quot;);</span>
+}
+<span class="fc bfc" id="L204" title="All 2 branches covered.">if (!this.correspondance(value)) {</span>
+<span class="fc" id="L205">throw new IllegalArgumentException(&quot;(Valeur non autorise '1',...,'9')&quot;);</span>
+}
+<span class="pc bpc" id="L207" title="1 of 2 branches missed.">if ((carrePossible(x, y, value))</span>
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">&amp;&amp; (lignePossible(x, value))</span>
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">&amp;&amp; (colonnePossible(y, value))) {</span>
+<span class="fc" id="L210">possibl = true;</span>
+} else {
+<span class="nc" id="L212">possibl = false;</span>
+}
+<span class="fc" id="L214">return possibl;</span>
+}
+/**
+* Affiche une grille sudoku complète.
+*/
+public void afficherGrille() {
+<span class="nc bnc" id="L220" title="All 2 branches missed.">for (int x = 0; x &lt; this.line; x++) {</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">for (int y = 0; y &lt; this.col; y++) {</span>
+<span class="nc" id="L222">System.out.print(&quot; &quot; + this.sudoku[x][y]);</span>
+}
+<span class="nc" id="L224">System.out.println();</span>
+}
+<span class="nc" id="L226">System.out.println();</span>
+<span class="nc" id="L227">}</span>
+/**
+* le programme principal.
+*/
+public static void main() {
+int dimension;
+int box;
+char val;
+do {
+<span class="nc" id="L236">Scanner input = new Scanner(System.in);</span>
+<span class="nc" id="L237">System.out.print(&quot;Nombre de cases de la grille [9 ou 16]: &quot;);</span>
+<span class="nc" id="L238">dimension = input.nextInt();</span>
+}
+<span class="nc bnc" id="L240" title="All 4 branches missed.">while ((dimension != SUDOKU_9) &amp;&amp; (dimension != SUDOKU_16));</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">if (dimension == SUDOKU_9) {</span>
+<span class="nc" id="L242">box = CARRE_3;</span>
+} else {
+<span class="nc" id="L244">box = CARRE_4;</span>
+}
+<span class="nc" id="L246">GrilleImpl sudoku = new GrilleImpl(dimension, dimension, box);</span>
+<span class="nc" id="L247">int max = sudoku.getDimension();</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">for (int i = 0; i &lt; max; i++) {</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">for (int j = 0; j &lt; max; j++) {</span>
+<span class="nc" id="L250">boolean suivant = false;</span>
+do {
+<span class="nc" id="L252">int indiceligne = i + 1;</span>
+<span class="nc" id="L253">int indicecolonne = j + 1;</span>
+<span class="nc" id="L254">Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L255">System.out.println(&quot;Ligne [&quot;</span>
++ indiceligne + &quot;] Colonne [&quot; + indicecolonne + &quot;] : &quot;);
+<span class="nc" id="L257">String str = scanner.nextLine();</span>
+<span class="nc bnc" id="L258" title="All 4 branches missed.">if ((str == null) || (str.trim().isEmpty())) {</span>
+<span class="nc" id="L259">val = EMPTY;</span>
+} else {
+<span class="nc" id="L261">val = str.charAt(0);</span>
+}
+<span class="nc bnc" id="L263" title="All 2 branches missed.">if (val != EMPTY) {</span>
+<span class="nc bnc" id="L264" title="All 2 branches missed.">if (sudoku.possible(i, j, val)) {</span>
+<span class="nc" id="L265">sudoku.setValue(i, j, val);</span>
+<span class="nc" id="L266">suivant = true;</span>
+}
+} else {
+<span class="nc" id="L269">suivant = true;</span>
+}
+}
+<span class="nc bnc" id="L272" title="All 2 branches missed.">while (!suivant);</span>
+}
+}
+<span class="nc bnc" id="L275" title="All 2 branches missed.">if (sudoku.complete()) {</span>
+<span class="nc" id="L276">sudoku.afficherGrille();</span>
+} else {
+<span class="nc" id="L278">System.out.println(&quot;Grille incomplete.&quot;);</span>
+}
+<span class="nc" id="L280">}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
