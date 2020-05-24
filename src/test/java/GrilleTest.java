@@ -1,3 +1,11 @@
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -64,6 +72,9 @@ private char[][] sudokutest = {
 };
 /**Creation d'une grille de test vide.*/
 private GrilleImpl  grille = new GrilleImpl(INT_9, INT_9, INT_3);
+private File sudoku1 = new File("src/main/resources/sudoku1.txt");
+private File sudoku2 = new File("src/main/resources/sudoku2.txt");
+private GrilleParser grille1=new GrilleParser();
 /**test de validation de la fonction Getdimension.*/
 @Test
 public void testGetDimension() {
@@ -147,4 +158,17 @@ assertEquals("(Valeur non autorise '1',...,'9')", e.getMessage());
 public void testcomplet() {
 assertTrue(grille.complete());
 }
+/**Test de la fonction solve.*/
+@Test
+public void testsolve()
+throws IOException { 
+grille1.parse(sudoku1,grille);
+//}
+assertTrue(grille.solve());
+}
+//@Test
+//public void testparse() 
+//  throws IOException { 
+//    parse(sudoku1, grille);
+//}
 }

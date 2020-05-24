@@ -1,3 +1,11 @@
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 /**
 *Implementation d'une grille.
@@ -213,6 +221,30 @@ possibl = false;
 }
 return possibl;
 }
+//Solve method. We will use a recursive BackTracking algorithm.
+public boolean solve() {
+for (int x = 0; x < this.line; x++) {
+for (int y = 0; y < this.col; y++) {
+// we search an empty cell
+if (this.sudoku[x][y] == EMPTY) {
+// we try possible numbers
+for (int i = 0; i < MAX_CHAR; i++) {
+if (possible(x, y, possible[i])) {
+// number ok. it respects sudoku constraints
+this.sudoku[x][y] = possible[i];
+if (solve()) { // we start backtracking recursively
+return true;
+} else { // if not a solution, we empty the cell and we continue
+this.sudoku[x][y] = EMPTY;
+}
+}
+}
+return false; // we return false
+}
+}
+}
+return true; // sudoku solved
+}
 /**
 * Affiche une grille sudoku complète.
 */
@@ -228,10 +260,12 @@ System.out.println();
 /**
 * le programme principal.
 */
-public static void main() {
+//public static void main() {
+public static void main(String[] args) {
 int dimension;
 int box;
 char val;
+
 do {
 Scanner input = new Scanner(System.in);
 System.out.print("Nombre de cases de la grille [9 ou 16]: ");
@@ -245,35 +279,24 @@ box = CARRE_4;
 }
 GrilleImpl sudoku = new GrilleImpl(dimension, dimension, box);
 int max = sudoku.getDimension();
-for (int i = 0; i < max; i++) {
-for (int j = 0; j < max; j++) {
-boolean suivant = false;
-do {
-int indiceligne = i + 1;
-int indicecolonne = j + 1;
-Scanner scanner = new Scanner(System.in);
-System.out.println("Ligne ["
-+ indiceligne + "] Colonne [" + indicecolonne + "] : ");
-String str = scanner.nextLine();
-if ((str == null) || (str.trim().isEmpty())) {
-val = EMPTY;
-} else {
-val = str.charAt(0);
+File sudoku1 = new File("../resources/sudoku1.txt");
+GrilleParser grille1=new GrilleParser();
+try {
+	grille1.parse(sudoku1,sudoku);
+} catch (IOException e) {
+    System.out.println("impossible de lire le fichier"); 
+    e.printStackTrace();
 }
-if (val != EMPTY) {
-if (sudoku.possible(i, j, val)) {
-sudoku.setValue(i, j, val);
-suivant = true;
-}
-} else {
-suivant = true;
-}
-}
-while (!suivant);
-}
-}
+
 if (sudoku.complete()) {
+System.out.println("Grille à résoudre.");
 sudoku.afficherGrille();
+if (sudoku.solve()) {
+System.out.println("Grille résolue.");
+sudoku.afficherGrille();
+}else {
+System.out.println("Grille impossible à résoudre.");
+}
 } else {
 System.out.println("Grille incomplete.");
 }
