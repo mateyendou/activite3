@@ -6,12 +6,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-
-public class GrilleParser {
+/**
+*Classe utilitaire pour lire un fichier.
+*et remplir une grille sudoku
+*/
+class GrilleParser {
 /**
 *Constructeur par defaut.
 *@param in le fichier à lire.
-*@param grille la grille sudoku à remplir.*/
+*@param grille la grille sudoku à remplir.
+*@throws IOException si le fichier
+*ne peut etre lu*/
 public static void parse(final InputStream in, final Grille grille) throws IOException {
 Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8);
 int dimension = grille.getDimension();
@@ -34,7 +39,9 @@ reader.close();
 /**
 *methode pour lire les données et remplir la grille.
 *@param f le fichier à lire.
-*@param grille la grille sudoku à remplir.*/
+*@param grille la grille sudoku à remplir.
+*@throws IOException si le fichier
+*ne peut etre lu*/
 public static void parse(final File f, final Grille grille) throws IOException {
     parse(new FileInputStream(f), grille);
 }

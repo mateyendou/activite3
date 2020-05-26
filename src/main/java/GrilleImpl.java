@@ -1,4 +1,4 @@
-import java.io.EOFException;
+//import java.io.EOFException;
 import java.io.File;
 //import java.io.FileInputStream;
 import java.io.IOException;
@@ -225,8 +225,8 @@ return possibl;
 }
 /**
 *Solve method. We will use a recursive BackTracking algorithm.
-*/ 
-public boolean solve() {
+*/
+public final boolean solve() {
 for (int x = 0; x < this.line; x++) {
 for (int y = 0; y < this.col; y++) {
 // we search an empty cell
@@ -252,7 +252,7 @@ return true; // sudoku solved
 /**
 * Affiche une grille sudoku complète.
 */
-public void afficherGrille() {
+public final void afficherGrille() {
 for (int x = 0; x < this.line; x++) {
 for (int y = 0; y < this.col; y++) {
 System.out.print(" " + this.sudoku[x][y]);
@@ -264,8 +264,8 @@ System.out.println();
 /**
 * le programme principal.
 */
-//public static void main() {
-public static void main(String[] args) {
+public static void main() {
+//public static void main(final String[] args) {
 int dimension;
 int box;
 char val;
@@ -284,12 +284,12 @@ box = CARRE_4;
 GrilleImpl sudoku = new GrilleImpl(dimension, dimension, box);
 int max = sudoku.getDimension();
 File sudoku1 = new File("../resources/sudoku1.txt");
-GrilleParser grille1=new GrilleParser();
+GrilleParser grille1 = new GrilleParser();
 try {
-	grille1.parse(sudoku1,sudoku);
+	grille1.parse(sudoku1, sudoku);
 } catch (IOException e) {
-    System.out.println("impossible de lire le fichier"); 
-    e.printStackTrace();
+    System.out.println("impossible de lire le fichier");
+e.printStackTrace();
 }
 
 if (sudoku.complete()) {
@@ -298,7 +298,7 @@ sudoku.afficherGrille();
 if (sudoku.solve()) {
 System.out.println("Grille résolue.");
 sudoku.afficherGrille();
-}else {
+} else {
 System.out.println("Grille impossible à résoudre.");
 }
 } else {
