@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 *Classe utilitaire pour lire un fichier.
 *et remplir une grille sudoku
 */
-public final class GrilleParser {
+final class GrilleParser {
 /**
 *Constructeur par defaut.
 */
