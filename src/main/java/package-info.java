@@ -1,1 +1,3 @@
-package dev;
+/**
+ * fichier package-info.java.
+ */

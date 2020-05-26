@@ -5,7 +5,7 @@ public interface Grille {
  /**
   * Caractere de case vide.
   */
- static final char EMPTY = '@';
+ char EMPTY = '@';
  /**
   * Caractere possible a mettre dans la grille.
   *
@@ -13,12 +13,12 @@ public interface Grille {
   *
   * pour une grille 16x16: 0..9-a..f
   */
- static final char[] possible = new char[] {'1', '2', '3', '4', '5', '6',
+ char[] POSSIBLE = new char[] {'1', '2', '3', '4', '5', '6',
    '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f' };
 /**
   * @return largeur/hauteur de la grille.
   */
- public int getDimension();
+ int getDimension();
 /**
   * Affecte une valeur dans la grille.
   *
@@ -32,7 +32,7 @@ public interface Grille {
   * @throws IllegalArgumentException si value n'est pas un caractere autorise
   *        ('1',...,'9')
   */
- public void setValue(int x, int y, char value) throws IllegalArgumentException;
+ void setValue(int x, int y, char value) throws IllegalArgumentException;
 /**
   * Recupere une valeur de la grille.
   *
@@ -41,13 +41,13 @@ public interface Grille {
   * @return valeur dans la case x,y
   * @throws IllegalArgumentException si x ou y sont hors bornes (0-8)
   */
- public char getValue(int x, int y) throws IllegalArgumentException;
+ char getValue(int x, int y) throws IllegalArgumentException;
 /**
   * Test si une grille est terminee.
   *
   * @return true si la grille est complete
   */
- public boolean complete();
+ boolean complete();
 /**
   * Test si une valeur est possible dans la grille par rapport a ce qu'elle.
   * contient deja
@@ -60,6 +60,6 @@ public interface Grille {
   * @throws IllegalArgumentException si value n'est pas un caractere autorise
   *        ('1',...,'9',..)
   */
-public boolean possible(int x, int y, char value)
+boolean possible(int x, int y, char value)
 throws IllegalArgumentException;
 }
