@@ -10,9 +10,15 @@ import java.nio.charset.StandardCharsets;
 *Classe utilitaire pour lire un fichier.
 *et remplir une grille sudoku
 */
-class GrilleParser {
+public final class GrilleParser {
 /**
 *Constructeur par defaut.
+*/
+//private GrilleParser() {
+//not called
+//}
+/**
+*methode pour lire les données et remplir la grille.
 *@param in le fichier à lire.
 *@param grille la grille sudoku à remplir.
 *@throws IOException si le fichier
@@ -37,7 +43,8 @@ if (lus != 1) {
 reader.close();
 }
 /**
-*methode pour lire les données et remplir la grille.
+*Methode pour convertir java.io.File
+*en java.io.InputStream.
 *@param f le fichier à lire.
 *@param grille la grille sudoku à remplir.
 *@throws IOException si le fichier

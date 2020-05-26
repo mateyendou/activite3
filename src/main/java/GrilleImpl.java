@@ -17,7 +17,7 @@ private final int line;
 private final int col;
 /**Déclaration de la taille du carré.*/
 private final int sq;
-/**Déclaration du caractère 'vide'.*/
+/**Constante.*/
 static final char EMPTY = '@';
 /**Déclaration des valeurs possibble pour la grille.*/
 static final char[] POSSIBLE = new char[] {'1', '2', '3', '4', '5', '6',
@@ -225,29 +225,27 @@ return possibl;
 }
 /**
 *Solve method. We will use a recursive BackTracking algorithm.
+*@return true si la grille est resolue
 */
 public final boolean solve() {
 for (int x = 0; x < this.line; x++) {
 for (int y = 0; y < this.col; y++) {
-// we search an empty cell
 if (this.sudoku[x][y] == EMPTY) {
-// we try possible numbers
 for (int i = 0; i < MAX_CHAR; i++) {
 if (possible(x, y, POSSIBLE[i])) {
-// number ok. it respects sudoku constraints
 this.sudoku[x][y] = POSSIBLE[i];
-if (solve()) { // we start backtracking recursively
+if (solve()) {
 return true;
-} else { // if not a solution, we empty the cell and we continue
+} else {
 this.sudoku[x][y] = EMPTY;
 }
 }
 }
-return false; // we return false
+return false;
 }
 }
 }
-return true; // sudoku solved
+return true;
 }
 /**
 * Affiche une grille sudoku complète.
@@ -286,7 +284,7 @@ int max = sudoku.getDimension();
 File sudoku1 = new File("../resources/sudoku1.txt");
 GrilleParser grille1 = new GrilleParser();
 try {
-	grille1.parse(sudoku1, sudoku);
+grille1.parse(sudoku1, sudoku);
 } catch (IOException e) {
     System.out.println("impossible de lire le fichier");
 e.printStackTrace();
