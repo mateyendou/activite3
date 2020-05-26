@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="GrilleTest" time="0.195" tests="14" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="GrilleTest" time="0.26" tests="14" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="gnome"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/mateyendou/eclipse-workspace/c306/activite3/target/surefire/surefirebooter4846348848998713853.jar /home/mateyendou/eclipse-workspace/c306/activite3/target/surefire 2020-05-26T09-41-46_169-jvmRun1 surefire6431110091953191205tmp surefire_07285742913723203130tmp"/>
+    <property name="sun.java.command" value="/home/mateyendou/eclipse-workspace/c306/activite3/target/surefire/surefirebooter16311422752460270267.jar /home/mateyendou/eclipse-workspace/c306/activite3/target/surefire 2020-05-26T10-03-18_357-jvmRun1 surefire15745040098386751295tmp surefire_09850403599411376296tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/mateyendou/eclipse-workspace/c306/activite3/target/test-classes:/home/mateyendou/eclipse-workspace/c306/activite3/target/classes:/home/mateyendou/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar:/home/mateyendou/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/home/mateyendou/.m2/repository/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar:/home/mateyendou/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/home/mateyendou/.m2/repository/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar:/home/mateyendou/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -32,7 +32,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/mateyendou/eclipse-workspace/c306/activite3/target/surefire/surefirebooter4846348848998713853.jar"/>
+    <property name="surefire.real.class.path" value="/home/mateyendou/eclipse-workspace/c306/activite3/target/surefire/surefirebooter16311422752460270267.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.7+10-post-Ubuntu-2ubuntu218.04"/>
     <property name="user.name" value="mateyendou"/>
@@ -57,18 +57,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testSetvalue" classname="GrilleTest" time="0.049"/>
-  <testcase name="testSetvalueX" classname="GrilleTest" time="0.014"/>
-  <testcase name="testGetvalueX" classname="GrilleTest" time="0.012"/>
-  <testcase name="testsetvalueVal" classname="GrilleTest" time="0.007"/>
-  <testcase name="testGetvalue" classname="GrilleTest" time="0.004"/>
-  <testcase name="testsolve" classname="GrilleTest" time="0.006"/>
-  <testcase name="testcomplet" classname="GrilleTest" time="0.002"/>
-  <testcase name="testGetDimension" classname="GrilleTest" time="0.001"/>
-  <testcase name="teststevalueY" classname="GrilleTest" time="0.007"/>
-  <testcase name="testgetvalueY" classname="GrilleTest" time="0.002"/>
-  <testcase name="testpossibleX" classname="GrilleTest" time="0.002"/>
-  <testcase name="testpossibleY" classname="GrilleTest" time="0.008"/>
-  <testcase name="testpossibleVal" classname="GrilleTest" time="0"/>
-  <testcase name="testpossible" classname="GrilleTest" time="0.002"/>
+  <testcase name="testSetvalue" classname="GrilleTest" time="0.071"/>
+  <testcase name="testSetvalueX" classname="GrilleTest" time="0.019"/>
+  <testcase name="testGetvalueX" classname="GrilleTest" time="0.015"/>
+  <testcase name="testsetvalueVal" classname="GrilleTest" time="0.012"/>
+  <testcase name="testGetvalue" classname="GrilleTest" time="0.014"/>
+  <testcase name="testsolve" classname="GrilleTest" time="0.011"/>
+  <testcase name="testcomplet" classname="GrilleTest" time="0.003"/>
+  <testcase name="testGetDimension" classname="GrilleTest" time="0.005"/>
+  <testcase name="teststevalueY" classname="GrilleTest" time="0.005"/>
+  <testcase name="testgetvalueY" classname="GrilleTest" time="0.003"/>
+  <testcase name="testpossibleX" classname="GrilleTest" time="0.001"/>
+  <testcase name="testpossibleY" classname="GrilleTest" time="0.003"/>
+  <testcase name="testpossibleVal" classname="GrilleTest" time="0.001"/>
+  <testcase name="testpossible" classname="GrilleTest" time="0.001"/>
 </testsuite>
