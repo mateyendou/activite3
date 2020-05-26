@@ -266,21 +266,21 @@ public static void main() {
 //public static void main(final String[] args) {
 int dimension;
 int box;
-char val;
+//char val;
 
 do {
 Scanner input = new Scanner(System.in);
 System.out.print("Nombre de cases de la grille [9 ou 16]: ");
 dimension = input.nextInt();
 }
-while ((dimension != SUDOKU_9) && (dimension != SUDOKU_16));
+while (dimension != SUDOKU_9 && dimension != SUDOKU_16);
 if (dimension == SUDOKU_9) {
 box = CARRE_3;
 } else {
 box = CARRE_4;
 }
 GrilleImpl sudoku = new GrilleImpl(dimension, dimension, box);
-int max = sudoku.getDimension();
+//int max = sudoku.getDimension();
 File sudoku1 = new File("../resources/sudoku1.txt");
 GrilleParser grille1 = new GrilleParser();
 try {
